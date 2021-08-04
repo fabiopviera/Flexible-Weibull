@@ -1,0 +1,20 @@
+
+data{
+ C <- 100
+ for (i in 1:n){ zeros[i] <- 0}
+}
+model{
+for (i in 1:n){
+zeros[i] ~ dpois(phi[i])
+phi[i] <- - l[i] + C
+l[i] <-  log((exp((sigma*y[i] - ((((2*sigma*mu-(log(log(2))))^2)
+-(log(log(2)))^2)/(4*sigma))/y[i])-exp(sigma*y[i] - 
+((((2*sigma*mu-(log(log(2))))^2)-
+(log(log(2)))^2)/(4*sigma))/y[i])))*
+(sigma+((((2*sigma*mu-(log(log(2))))^2)-(log(log(2)))^2)/
+(4*sigma))/(y[i]^2)))
+}
+ #prior's distribuition
+mu ~ dgamma(0.001,0.001)
+sigma ~ dgamma(0.001,0.001)
+}
