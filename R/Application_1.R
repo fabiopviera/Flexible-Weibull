@@ -1,38 +1,19 @@
 #### Application 1
 
-require(coda)
-require(R2jags)
-require(rjags)
-library(mcmc)
-library(mcmcplots)
-require(LaplacesDemon)
-require(e1071)
+
 require(gamlss)
-require(nortest)
+
+
+
+source("R/FW1_GAMLSS.R")
 
 #Time between failures of secondary reactor pumps,
 D3<-c(2.160, 0.746, 0.402, 0.954, 0.491, 6.560, 4.992, 0.347,
          0.150, 0.358, 0.101, 1.359, 3.465, 1.060, 0.614, 1.921,
          4.082, 0.199, 0.605, 0.273, 0.070, 0.062, 5.320)
 
-hist(D3,freq=F)
-lines(density(D3),lwd=3,col=2)
-
-summary(D3)
-sd(D3)
-skewness(D3)
-kurtosis(D3)
-length(D3)
-mean(D3)
-sd(D3)
 
 
-#fit1 <-gamlss(D3~1,family=FW1(mu.link = "identity",sigma.link = "identity"),
-#              method = CG(100),
-#              sigma.start = 0.0018)
-#fit1 <-gamlss(D3~1,family=FW1(mu.link = "identity",sigma.link = "identity"),
-#              method = mixed(5,100),
-#              sigma.start = 0.0018)
 
 
 fit1 <-gamlss(D3~1,family=FW1(mu.link = "identity",sigma.link = "identity"),n.cyc = 1200,
