@@ -134,55 +134,16 @@ EBIC.c <- d.bar.c +p*log(n)
 EBIC.c 
 
 
-#m?dia em rela??o a cadeia de mu e sigma
+# mu and sigma
 mean(Modelo.FW$BUGSoutput$sims.list$mu)
 mean(Modelo.FW$BUGSoutput$sims.list$sigma)
 
-Modelo.FW$BUGSoutput$sd
-Modelo.FW$BUGSoutput$
-  
+ 
 
-quantile(Modelo.FW$BUGSoutput$sims.list$sigma)
-hist(Modelo.FW$BUGSoutput$sims.list$sigma,freq=F)
-lines(density(Modelo.FW$BUGSoutput$sims.list$sigma))
-curve(dgamma(x,0.01,0.001),add=T,lwd=3)
+####################################################################
+# Bayesian WEI3
 
 
-#Intervalos para os par?metros
-plot(Modelo.FW)
-
-x11()
-traceplot(Modelo.FW)
-
-Modelo.FW.mcmc <- as.mcmc(Modelo.FW)
-summary(Modelo.FW.mcmc)
-
-gelman.plot(Modelo.FW.mcmc)
-
-x11()
-plot(Modelo.FW.mcmc)
-
-require(superdiag)
-mcmcplot(Modelo.FW.mcmc)
-superdiag(Modelo.FW.mcmc, burnin = 1000)
-
-
-traceplot(Modelo.FW.mcmc)
-x11()
-denplot(Modelo.FW.mcmc)
-x11()
-autocorr.plot(Modelo.FW.mcmc)
-
-x11()
-gelman.plot( Modelo.FW.mcmc )
-geweke.diag( Modelo.FW.mcmc )
-
-ll <- log(log(2))
-b <- 
-cdf <-  1- 
-
-#################################################
-#Weibullllll
 cat("
 data{
  C <- 100
@@ -208,9 +169,8 @@ cens <- cens
 data.D4 <- list(n=n,  y=y, cens=cens)
 
 inits1 <-list("mu"=214, "sigma"=0.02) 
-#inits2 <- list("mu"=mean(D3), "sigma"=0.1) 
 inits2 <- list("mu"=214, "sigma"=0.05) 
-#bayes.mod.inits <- list(inits1, inits2, inits3)
+
 bayes.mod.params <- c("mu", "sigma")
 bayes.mod.inits <- list(inits1, inits2)
 
@@ -224,17 +184,19 @@ Modelo.WEI <- jags(data=data.D4, inits=bayes.mod.inits,parameters.to.save = baye
 print(Modelo.WEI)
 
 
-#valor de DIC  c=100
+#vDIC  c=100
 DIC1 <- Modelo.WEI$BUGSoutput$DIC
 DIC1
-#valor de DIC corrigido menos c=100
+
+#DIC corrected
 DIC.c1 <- (DIC1-2*n*100)
 DIC.c1
 
-#Deviance m?dio
+#Deviance 
 d.bar1 <- mean(Modelo.WEI$BUGSoutput$sims.list$deviance)
 d.bar1
-#Deviance m?dio corrigido
+
+#Deviance corrected
 d.bar.c1 <- (d.bar1-2*n*100)
 d.bar.c1
 
@@ -244,8 +206,8 @@ Modelo.WEI$BUGSoutput$pD
 DIC1-d.bar1
 DIC.c1 - d.bar.c1
 
-#Estatistica EAIC
-p <- 2 #n?mero de par?metros do modelo
+#Statistics EAIC
+p <- 2 #parameters
 
 EAIC.c1 <- d.bar.c1 +2*p
 EAIC.c1 
@@ -254,41 +216,7 @@ EBIC.c1 <- d.bar.c1 +p*log(n)
 EBIC.c1 
 
 
-#m?dia em rela??o a cadeia de mu e sigma
+#mu and sigma
 mean(Modelo.WEI$BUGSoutput$sims.list$mu)
 mean(Modelo.WEI$BUGSoutput$sims.list$sigma)
 
-
-hist(Modelo.WEI$BUGSoutput$sims.list$mu,freq=F,xlim=c(0,3))
-lines(density(Modelo.WEI$BUGSoutput$sims.list$mu))
-curve(dgamma(x,0.001,0.001),add=T,lwd=3)
-
-
-#Intervalos para os par?metros
-plot(Modelo.WEI)
-
-x11()
-traceplot(Modelo.WEI)
-
-Modelo.WEI.mcmc <- as.mcmc(Modelo.WEI)
-summary(Modelo.WEI.mcmc)
-
-gelman.plot(Modelo.WEI.mcmc)
-
-x11()
-plot(Modelo.WEI.mcmc)
-
-#require(superdiag)
-mcmcplot(Modelo.WEI.mcmc)
-superdiag(Modelo.WEI.mcmc, burnin = 1000)
-
-
-traceplot(Modelo.WEI.mcmc)
-x11()
-denplot(Modelo.WEI.mcmc)
-x11()
-autocorr.plot(Modelo.WEI.mcmc)
-
-x11()
-gelman.plot( Modelo.WEI.mcmc )
-geweke.diag( Modelo.WEI.mcmc )
