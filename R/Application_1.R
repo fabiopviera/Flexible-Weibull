@@ -135,6 +135,7 @@ Modelo.FW$BUGSoutput$pD
 DIC-d.bar
 DIC.c - d.bar.c
 
+#Estatistics EAIC
 #EAIC
 p <- 2 #parameters
 
@@ -145,7 +146,7 @@ EBIC.c <- d.bar.c +p*log(n)
 EBIC.c 
 
 
-#mu e sigma
+#mu and sigma
 mean(Modelo.FW$BUGSoutput$sims.list$mu)
 mean(Modelo.FW$BUGSoutput$sims.list$sigma)
 
@@ -214,8 +215,8 @@ Modelo.WEI$BUGSoutput$pD
 DIC1-d.bar1
 DIC.c1 - d.bar.c1
 
-#Estatistica EAIC
-p <- 2 #parameters do modelo
+#Estatistics EAIC
+p <- 2 #parameters
 
 EAIC.c1 <- d.bar.c1 +2*p
 EAIC.c1 
@@ -224,7 +225,7 @@ EBIC.c1 <- d.bar.c1 +p*log(n)
 EBIC.c1 
 
 
-#mu e sigma
+#mu and sigma
 mean(Modelo.WEI$BUGSoutput$sims.list$mu)
 mean(Modelo.WEI$BUGSoutput$sims.list$sigma)
 
