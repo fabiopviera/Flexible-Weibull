@@ -10,6 +10,9 @@ require(e1071)
 require(gamlss)
 require(nortest)
 
+source("R/FW1_GAMLSS.R")
+
+
 #Time between failures of secondary reactor pumps,
 D3<-c(2.160, 0.746, 0.402, 0.954, 0.491, 6.560, 4.992, 0.347,
          0.150, 0.358, 0.101, 1.359, 3.465, 1.060, 0.614, 1.921,
@@ -117,7 +120,7 @@ print(Modelo.FW)
 DIC <- Modelo.FW$BUGSoutput$DIC
 DIC
 
-#DIC adjusted
+#DIC corrected
 DIC.c <- (DIC-2*23*100)
 DIC.c
 
@@ -125,7 +128,7 @@ DIC.c
 d.bar <- mean(Modelo.FW$BUGSoutput$sims.list$deviance)
 d.bar
 
-#Deviance adjusted
+#Deviance corrected
 d.bar.c <- (d.bar-2*23*100)
 d.bar.c
 
@@ -135,7 +138,7 @@ Modelo.FW$BUGSoutput$pD
 DIC-d.bar
 DIC.c - d.bar.c
 
-#Estatistics EAIC
+#Statistics EAIC
 #EAIC
 p <- 2 #parameters
 
@@ -197,7 +200,7 @@ print(Modelo.WEI)
 DIC1 <- Modelo.WEI$BUGSoutput$DIC
 DIC1
 
-#DIC adjusted
+#DIC corrected
 DIC.c1 <- (DIC1-2*23*100)
 DIC.c1
 
@@ -205,7 +208,7 @@ DIC.c1
 d.bar1 <- mean(Modelo.WEI$BUGSoutput$sims.list$deviance)
 d.bar1
 
-#Deviance adjusted
+#Deviance corrected
 d.bar.c1 <- (d.bar1-2*23*100)
 d.bar.c1
 
@@ -215,7 +218,7 @@ Modelo.WEI$BUGSoutput$pD
 DIC1-d.bar1
 DIC.c1 - d.bar.c1
 
-#Estatistics EAIC
+#Statistics EAIC
 p <- 2 #parameters
 
 EAIC.c1 <- d.bar.c1 +2*p
